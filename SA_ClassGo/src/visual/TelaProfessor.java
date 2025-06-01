@@ -4,20 +4,25 @@
  */
 package visual;
 
+import modelo.Professor;
+
 /**
  *
  * @author Usuario
  */
 public class TelaProfessor extends javax.swing.JFrame {
-
+private Professor professorLogado;
     /**
      * Creates new form TelaProfessor
      */
-    public TelaProfessor() {
+    public TelaProfessor(Professor logado) {
         initComponents();
         
-    txtNomeProfessor.setEditable(false); // Impede digitação
-    txtNomeProfessor.setText("Aguida"); // Texto exibido
+    this.professorLogado = logado;
+
+    txtNomeProfessor.setEditable(false);
+    txtNomeProfessor.setText(professorLogado.getNome());
+
     
     
     }
@@ -82,12 +87,21 @@ public class TelaProfessor extends javax.swing.JFrame {
         jLabel2.setText("Turmas:");
         jPanel02_TelaProfessor.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
+        btnExcluir.setBackground(new java.awt.Color(0, 102, 255));
+        btnExcluir.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir");
         jPanel02_TelaProfessor.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        btnAlterar.setBackground(new java.awt.Color(0, 102, 255));
+        btnAlterar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnAlterar.setText("Alterar");
         jPanel02_TelaProfessor.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
+        btnVisualizar.setBackground(new java.awt.Color(0, 102, 255));
+        btnVisualizar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        btnVisualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnVisualizar.setText("Visualizar");
         jPanel02_TelaProfessor.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
@@ -161,43 +175,15 @@ public class TelaProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCdastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCdastrarTurmaActionPerformed
-        // TODO add your handling code here:
+        
+        TelaCadastroTurma t = new TelaCadastroTurma(professorLogado);
+        t.setVisible(true);
     }//GEN-LAST:event_btnCdastrarTurmaActionPerformed
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaProfessor().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

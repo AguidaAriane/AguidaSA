@@ -19,7 +19,7 @@ public class TurmaDAO {
     
     public void cadastrarTurma(Turma t){
         
-        String sql = "INSERT INTO Turma(nome , idprofessor) VALUES (? , ?)";
+        String sql = "INSERT INTO Turma(nome , Professor_idprofessor) VALUES (? , ?)";
         
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

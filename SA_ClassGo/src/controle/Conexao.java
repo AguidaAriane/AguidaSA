@@ -50,7 +50,7 @@ public class Conexao {
     }
     
     public static Connection conectar() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/cadastro";
+        String url = "jdbc:mysql://localhost:3306/banco_sa";
         String usuario = "root";
         String senha = ""; // Coloque sua senha aqui
 

@@ -4,17 +4,25 @@
  */
 package visual;
 
+import controle.TurmaDAO;
+import javax.swing.JOptionPane;
+import modelo.Professor;
+import modelo.Turma;
+
 /**
  *
  * @author aguida_silva
  */
 public class TelaCadastroTurma extends javax.swing.JFrame {
-
+  private Professor professorLogado;
     /**
      * Creates new form TelaCadastroTurma
      */
-    public TelaCadastroTurma() {
+    public TelaCadastroTurma(Professor p) {
         initComponents();
+        
+        this.professorLogado = p;
+        
     }
 
     /**
@@ -131,6 +139,24 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         
         String nome = txtNomeTurma2.getText();
         
+        Turma novaTurma = new Turma();
+        novaTurma.setNome(nome);
+        novaTurma.setProfessor(professorLogado);
+        
+            try {
+        TurmaDAO dao = new TurmaDAO();
+        dao.cadastrarTurma(novaTurma);
+
+        JOptionPane.showMessageDialog(null, "Turma cadastrada com sucesso!");
+        this.dispose(); // Fecha a tela de cadastro
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro ao cadastrar turma: " + e.getMessage(),
+                "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+        
+        
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -144,37 +170,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCadastroTurma().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastro;
