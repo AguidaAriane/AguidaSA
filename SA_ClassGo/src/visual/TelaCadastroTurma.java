@@ -39,7 +39,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNomeTurma2 = new javax.swing.JTextField();
         btnCadastro = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnVoltarTurma = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,14 +93,14 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        jButton2.setBackground(new java.awt.Color(0, 102, 255));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setBorder(null);
-        jButton2.setLabel("Voltar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltarTurma.setBackground(new java.awt.Color(0, 102, 255));
+        btnVoltarTurma.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnVoltarTurma.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltarTurma.setBorder(null);
+        btnVoltarTurma.setLabel("Voltar");
+        btnVoltarTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVoltarTurmaActionPerformed(evt);
             }
         });
 
@@ -111,12 +111,12 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnVoltarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addComponent(btnVoltarTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                 .addGap(4, 4, 4)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -139,6 +139,10 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         
         String nome = txtNomeTurma2.getText();
         
+        if (nome.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, preencha o nome da turma.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
         Turma novaTurma = new Turma();
         novaTurma.setNome(nome);
         novaTurma.setProfessor(professorLogado);
@@ -148,7 +152,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         dao.cadastrarTurma(novaTurma);
 
         JOptionPane.showMessageDialog(null, "Turma cadastrada com sucesso!");
-        this.dispose(); // Fecha a tela de cadastro
+        txtNomeTurma2.setText("");
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Erro ao cadastrar turma: " + e.getMessage(),
@@ -159,9 +163,13 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCadastroActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnVoltarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarTurmaActionPerformed
+        
+        TelaProfessor t = new TelaProfessor(professorLogado);
+        t.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarTurmaActionPerformed
 
     private void txtNomeTurma2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeTurma2ActionPerformed
         // TODO add your handling code here:
@@ -174,7 +182,7 @@ public class TelaCadastroTurma extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastro;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVoltarTurma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

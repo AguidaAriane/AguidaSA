@@ -10,15 +10,25 @@ package modelo;
  */
 public class Turma {
     
+    private int  idturma;
     private String nome;
     private Professor professor;
 
-    public Turma(String nome, Professor professor) {
+    public Turma() {
+    }
+
+    public Turma(int idturma, String nome, Professor professor) {
+        this.idturma = idturma;
         this.nome = nome;
         this.professor = professor;
     }
 
-    public Turma() {
+    public int getIdturma() {
+        return idturma;
+    }
+
+    public void setIdturma(int idturma) {
+        this.idturma = idturma;
     }
 
     public String getNome() {
@@ -36,6 +46,8 @@ public class Turma {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
+    
     
        
     

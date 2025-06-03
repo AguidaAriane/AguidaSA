@@ -4,7 +4,10 @@
  */
 package visual;
 
+import controle.TurmaDAO;
+import java.util.List;
 import modelo.Professor;
+import modelo.Turma;
 
 /**
  *
@@ -46,7 +49,7 @@ private Professor professorLogado;
         btnAlterar = new javax.swing.JButton();
         btnVisualizar = new javax.swing.JButton();
         txtNomeProfessor = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -116,14 +119,14 @@ private Professor professorLogado;
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 255));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Sair");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setBackground(new java.awt.Color(0, 102, 255));
+        btnSair.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(255, 255, 255));
+        btnSair.setText("Sair");
+        btnSair.setBorder(null);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -135,7 +138,7 @@ private Professor professorLogado;
                 .addGap(33, 33, 33)
                 .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addGroup(jPanel01_TelaProfessorLayout.createSequentialGroup()
                 .addComponent(jPanel02_TelaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,7 +150,7 @@ private Professor professorLogado;
                 .addContainerGap()
                 .addGroup(jPanel01_TelaProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel02_TelaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -170,16 +173,38 @@ private Professor professorLogado;
        
     }//GEN-LAST:event_txtNomeProfessorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+             // TODO add your handling code here:
+             
+          TelaLogin l = new TelaLogin();
+          l.setVisible(true);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCdastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCdastrarTurmaActionPerformed
         
         TelaCadastroTurma t = new TelaCadastroTurma(professorLogado);
         t.setVisible(true);
+        
+        this.dispose();
     }//GEN-LAST:event_btnCdastrarTurmaActionPerformed
-    
+    /*
+    private void carregarTurmas() {
+    try {
+        TurmaDAO dao = new TurmaDAO();
+        List<Turma> lista = dao.listarTurmasPorProfessor(professorLogado.getid_professor());
+
+        DefaultTableModel modelo = (DefaultTableModel) tabelaTurmas.getModel();
+        modelo.setRowCount(0); // limpa a tabela
+
+        for (Turma t : lista) {
+            modelo.addRow(new Object[]{t.getId(), t.getNome()});
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao carregar turmas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+}
+*/
     /**
      * @param args the command line arguments
      */
@@ -189,8 +214,8 @@ private Professor professorLogado;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCdastrarTurma;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnVisualizar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel01_TelaProfessor;
     private javax.swing.JPanel jPanel02_TelaProfessor;
