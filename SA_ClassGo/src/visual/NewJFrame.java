@@ -32,8 +32,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Documents\\Git hub SA\\AguidaSA\\SA_ClassGo\\src\\imagem\\logo02.png")); // NOI18N
-
         jRadioButton1.setText("jRadioButton1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -46,16 +44,16 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(197, 197, 197)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(381, 381, 381)
+                        .addGap(219, 219, 219)
                         .addComponent(jRadioButton1)))
-                .addContainerGap(774, Short.MAX_VALUE))
+                .addContainerGap(936, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(142, 142, 142)
+                .addGap(154, 154, 154)
                 .addComponent(jRadioButton1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(907, Short.MAX_VALUE))
         );

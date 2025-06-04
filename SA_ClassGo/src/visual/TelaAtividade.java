@@ -4,23 +4,29 @@
  */
 package visual;
 
+import modelo.Professor;
+import modelo.Turma;
+
 /**
  *
  * @author Usuario
  */
 public class TelaAtividade extends javax.swing.JFrame {
-
+private Turma turmaSelecionada;
+private Professor professorLogado;
     /**
      * Creates new form TelaProfessor
      */
-    public TelaAtividade() {
+    public TelaAtividade(Turma turma) {
         initComponents();
-        
-    txtNomeProfessor.setEditable(false); // Impede digitação
-    txtNomeProfessor.setText("Nome do Professor"); // Texto exibido
+        this.turmaSelecionada = turma;
     
-    txtNomeTurma.setEditable(false); // Impede digitação
-    txtNomeTurma.setText("Desenvolvimento de Sistema"); 
+    txtNomeTurma.setEditable(false);
+    txtNomeTurma.setText(turmaSelecionada.getNome());
+    
+    txtNomeProfessor.setEditable(false);
+    txtNomeProfessor.setText(turmaSelecionada.getProfessor().getNome());
+    
     
     
     }
@@ -168,43 +174,18 @@ public class TelaAtividade extends javax.swing.JFrame {
 
     private void btnCadastrarAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAtividadeActionPerformed
         // TODO add your handling code here:
+        
+        TelaCadastroAtividade telaCadastro = new TelaCadastroAtividade(turmaSelecionada);
+        telaCadastro.setVisible(true);
+        this.dispose();
+        
+        
     }//GEN-LAST:event_btnCadastrarAtividadeActionPerformed
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAtividade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAtividade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAtividade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAtividade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAtividade().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

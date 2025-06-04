@@ -69,3 +69,11 @@ VALUES ("Bruna" , "bruna@gmail.com" , "12345");
 
 INSERT INTO Professor (nome , email , senha)
 VALUES ("Vitor" , "vitor@gmail.com" , "54321");
+
+
+ALTER TABLE `Atividade`
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`idatividade`),
+MODIFY `idatividade` INT NOT NULL AUTO_INCREMENT;
+
+SHOW CREATE TABLE Atividade;

@@ -6,6 +6,8 @@ package visual;
 
 import controle.TurmaDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Professor;
 import modelo.Turma;
 
@@ -15,6 +17,7 @@ import modelo.Turma;
  */
 public class TelaProfessor extends javax.swing.JFrame {
 private Professor professorLogado;
+private Turma turma;
     /**
      * Creates new form TelaProfessor
      */
@@ -22,13 +25,15 @@ private Professor professorLogado;
         initComponents();
         
     this.professorLogado = logado;
-
+    carregarTurmas();
+   
     txtNomeProfessor.setEditable(false);
     txtNomeProfessor.setText(professorLogado.getNome());
 
     
     
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +47,7 @@ private Professor professorLogado;
         jPanel01_TelaProfessor = new javax.swing.JPanel();
         jPanel02_TelaProfessor = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaTurma = new javax.swing.JTable();
         btnCdastrarTurma = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
@@ -60,7 +65,7 @@ private Professor professorLogado;
         jPanel02_TelaProfessor.setBackground(new java.awt.Color(255, 255, 255));
         jPanel02_TelaProfessor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -71,7 +76,7 @@ private Professor professorLogado;
                 "Numero", "Nome"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaTurma);
 
         jPanel02_TelaProfessor.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 580, 330));
 
@@ -94,6 +99,11 @@ private Professor professorLogado;
         btnExcluir.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         jPanel02_TelaProfessor.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         btnAlterar.setBackground(new java.awt.Color(0, 102, 255));
@@ -106,6 +116,11 @@ private Professor professorLogado;
         btnVisualizar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         btnVisualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnVisualizar.setText("Visualizar");
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarActionPerformed(evt);
+            }
+        });
         jPanel02_TelaProfessor.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         txtNomeProfessor.setBackground(new java.awt.Color(0, 102, 255));
@@ -178,6 +193,8 @@ private Professor professorLogado;
              
           TelaLogin l = new TelaLogin();
           l.setVisible(true);
+          
+          this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCdastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCdastrarTurmaActionPerformed
@@ -187,24 +204,50 @@ private Professor professorLogado;
         
         this.dispose();
     }//GEN-LAST:event_btnCdastrarTurmaActionPerformed
-    /*
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
+        // TODO add your handling code here:
+        
+        int linhaSelecionada = tabelaTurma.getSelectedRow();
+        if (linhaSelecionada != -1) {
+        int idTurma = (int) tabelaTurma.getValueAt(linhaSelecionada, 0);
+        String nomeTurma = (String) tabelaTurma.getValueAt(linhaSelecionada, 1);
+
+         Turma turmaSelecionada = new Turma();
+         turmaSelecionada.setIdturma(idTurma);
+         turmaSelecionada.setNome(nomeTurma);
+         turmaSelecionada.setProfessor(professorLogado); 
+
+         TelaAtividade telaAtividades = new TelaAtividade(turmaSelecionada);
+         telaAtividades.setVisible(true);
+         this.dispose();
+      }        else {
+        JOptionPane.showMessageDialog(this, "Selecione uma turma.");
+      }
+
+    }//GEN-LAST:event_btnVisualizarActionPerformed
+    
     private void carregarTurmas() {
     try {
         TurmaDAO dao = new TurmaDAO();
-        List<Turma> lista = dao.listarTurmasPorProfessor(professorLogado.getid_professor());
+        List<Turma> lista = dao.listarTurma(professorLogado.getIdProfessor());
 
-        DefaultTableModel modelo = (DefaultTableModel) tabelaTurmas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaTurma.getModel();
         modelo.setRowCount(0); // limpa a tabela
 
         for (Turma t : lista) {
-            modelo.addRow(new Object[]{t.getId(), t.getNome()});
+            modelo.addRow(new Object[]{t.getIdturma(), t.getNome()});
         }
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Erro ao carregar turmas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
     }
 }
-*/
+
     /**
      * @param args the command line arguments
      */
@@ -220,7 +263,7 @@ private Professor professorLogado;
     private javax.swing.JPanel jPanel01_TelaProfessor;
     private javax.swing.JPanel jPanel02_TelaProfessor;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaTurma;
     private javax.swing.JTextField txtNomeProfessor;
     // End of variables declaration//GEN-END:variables
 }
