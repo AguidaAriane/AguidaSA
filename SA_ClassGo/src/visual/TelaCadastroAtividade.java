@@ -4,6 +4,9 @@
  */
 package visual;
 
+import controle.AtividadeDAO;
+import javax.swing.JOptionPane;
+import modelo.Atividade;
 import modelo.Turma;
 
 /**
@@ -151,6 +154,36 @@ private Turma turmaSelecionada;
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         // TODO add your handling code here:
+        try {
+            
+        String nome = txtNomeAtividade.getText();
+        String descricao = txtDescricao.getText();
+        
+        if(nome.isEmpty() || descricao.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
+            
+            return;
+        }
+        
+        Atividade t = new Atividade();
+        t.setNome(nome);
+        t.setDescricao(descricao);
+        t.setTurma(turmaSelecionada);
+        
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.cadastrarAtividade(t);
+        
+        JOptionPane.showMessageDialog(this, "Atividade cadastrada com sucesso!");
+            
+        } catch (Exception e) {
+            
+         JOptionPane.showMessageDialog(this, "Erro ao cadastrar atividade: " + e.getMessage());   
+        }
+        
+        txtNomeAtividade.setText("");
+        txtDescricao.setText("");
+        
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

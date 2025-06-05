@@ -18,7 +18,7 @@ import java.sql.Statement;
  */
 public class TurmaDAO {
     
-    public void cadastrarTurma(Turma t){
+    public void cadastrarTurma(Turma t) throws Exception{
         
         String sql = "INSERT INTO Turma(nome , Professor_idprofessor) VALUES (? , ?)";
         
@@ -30,13 +30,11 @@ public class TurmaDAO {
             stmt.executeUpdate();
             System.out.println("Cadastrado com sucesso!");
 
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
         }
     }
     
     
-   public List<Turma> listarTurma(int idProfessor) {
+   public List<Turma> listarTurma(int idProfessor) throws Exception {
     List<Turma> listaTurma = new ArrayList<>();
 
     String sql = "SELECT idturma, nome FROM Turma WHERE Professor_idprofessor = ?";
@@ -59,12 +57,12 @@ public class TurmaDAO {
             listaTurma.add(turma);
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
     }
 
     return listaTurma;
     }
+   
+   
 
     
     

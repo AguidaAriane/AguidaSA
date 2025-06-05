@@ -51,7 +51,6 @@ private Turma turma;
         btnCdastrarTurma = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
-        btnAlterar = new javax.swing.JButton();
         btnVisualizar = new javax.swing.JButton();
         txtNomeProfessor = new javax.swing.JTextField();
         btnSair = new javax.swing.JButton();
@@ -89,7 +88,7 @@ private Turma turma;
                 btnCdastrarTurmaActionPerformed(evt);
             }
         });
-        jPanel02_TelaProfessor.add(btnCdastrarTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
+        jPanel02_TelaProfessor.add(btnCdastrarTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 130, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Turmas:");
@@ -106,12 +105,6 @@ private Turma turma;
         });
         jPanel02_TelaProfessor.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        btnAlterar.setBackground(new java.awt.Color(0, 102, 255));
-        btnAlterar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
-        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAlterar.setText("Alterar");
-        jPanel02_TelaProfessor.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
-
         btnVisualizar.setBackground(new java.awt.Color(0, 102, 255));
         btnVisualizar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         btnVisualizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,7 +114,7 @@ private Turma turma;
                 btnVisualizarActionPerformed(evt);
             }
         });
-        jPanel02_TelaProfessor.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        jPanel02_TelaProfessor.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         txtNomeProfessor.setBackground(new java.awt.Color(0, 102, 255));
         txtNomeProfessor.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
@@ -254,7 +247,6 @@ private Turma turma;
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCdastrarTurma;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSair;

@@ -145,12 +145,14 @@ public class TelaLogin extends javax.swing.JFrame {
        
        if(logado != null){
            
-      // Aqui você pode abrir a próxima tela:
+      
     TelaProfessor tela = new TelaProfessor(logado);
     tela.setVisible(true);
     
-    // E talvez fechar a tela de login:
-    this.dispose(); // ou frameLogin.dispose();
+    
+    
+    this.dispose(); 
+    
     
     
 

@@ -4,6 +4,11 @@
  */
 package visual;
 
+import controle.AtividadeDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Atividade;
 import modelo.Professor;
 import modelo.Turma;
 
@@ -20,7 +25,8 @@ private Professor professorLogado;
     public TelaAtividade(Turma turma) {
         initComponents();
         this.turmaSelecionada = turma;
-    
+        this.professorLogado = turma.getProfessor();
+        carregarAtividades();
     txtNomeTurma.setEditable(false);
     txtNomeTurma.setText(turmaSelecionada.getNome());
     
@@ -30,6 +36,27 @@ private Professor professorLogado;
     
     
     }
+    
+    private void carregarAtividades() {
+    try {
+        AtividadeDAO dao = new AtividadeDAO();
+        List<Atividade> lista = dao.listarAtividadesPorTurma(
+            turmaSelecionada.getIdturma(),
+            turmaSelecionada.getProfessor().getIdProfessor()
+        );
+
+        DefaultTableModel modelo = (DefaultTableModel) tabelaAtividade.getModel();
+        modelo.setRowCount(0); // limpa tabela
+
+        for (Atividade a : lista) {
+            modelo.addRow(new Object[]{a.getNome(), a.getDescricao()});
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao carregar atividades: " + e.getMessage());
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,14 +70,13 @@ private Professor professorLogado;
         jPanel01_TelaProfessor = new javax.swing.JPanel();
         jPanel02_TelaProfessor = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaAtividade = new javax.swing.JTable();
         btnCadastrarAtividade = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btnExcluir = new javax.swing.JButton();
-        btnAlterar = new javax.swing.JButton();
         txtNomeTurma = new javax.swing.JTextField();
         txtNomeProfessor = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -61,7 +87,7 @@ private Professor professorLogado;
         jPanel02_TelaProfessor.setBackground(new java.awt.Color(255, 255, 255));
         jPanel02_TelaProfessor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAtividade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -72,7 +98,7 @@ private Professor professorLogado;
                 "Numero", "Nome"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaAtividade);
 
         jPanel02_TelaProfessor.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 580, 330));
 
@@ -92,12 +118,6 @@ private Professor professorLogado;
         jLabel2.setText("Turma:");
         jPanel02_TelaProfessor.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
-        btnExcluir.setText("Excluir");
-        jPanel02_TelaProfessor.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        btnAlterar.setText("Alterar");
-        jPanel02_TelaProfessor.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
-
         txtNomeTurma.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         txtNomeTurma.setBorder(null);
         txtNomeTurma.setFocusable(false);
@@ -114,14 +134,25 @@ private Professor professorLogado;
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 255));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Sair");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setBackground(new java.awt.Color(0, 102, 255));
+        btnSair.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(255, 255, 255));
+        btnSair.setText("Sair");
+        btnSair.setBorder(null);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSairActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setBackground(new java.awt.Color(0, 102, 255));
+        btnVoltar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoltar.setText("Voltar");
+        btnVoltar.setBorder(null);
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -133,7 +164,9 @@ private Professor professorLogado;
                 .addGap(33, 33, 33)
                 .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addGroup(jPanel01_TelaProfessorLayout.createSequentialGroup()
                 .addComponent(jPanel02_TelaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,7 +178,8 @@ private Professor professorLogado;
                 .addContainerGap()
                 .addGroup(jPanel01_TelaProfessorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel02_TelaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -168,9 +202,15 @@ private Professor professorLogado;
        
     }//GEN-LAST:event_txtNomeProfessorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        TelaLogin l = new TelaLogin();
+        l.setVisible(true);
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAtividadeActionPerformed
         // TODO add your handling code here:
@@ -181,6 +221,15 @@ private Professor professorLogado;
         
         
     }//GEN-LAST:event_btnCadastrarAtividadeActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        
+        TelaProfessor p = new TelaProfessor(professorLogado);
+        p.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -188,15 +237,14 @@ private Professor professorLogado;
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCadastrarAtividade;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel01_TelaProfessor;
     private javax.swing.JPanel jPanel02_TelaProfessor;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaAtividade;
     private javax.swing.JTextField txtNomeProfessor;
     private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
