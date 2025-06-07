@@ -200,6 +200,39 @@ private Turma turma;
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
+        
+        int linhaSelecionada = tabelaTurma.getSelectedRow();
+
+    if (linhaSelecionada == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione uma turma na tabela para excluir.");
+        return;
+    }
+
+    // Supondo que a coluna 1 (índice 1) tem o ID da turma
+    int idTurma = Integer.parseInt(tabelaTurma.getValueAt(linhaSelecionada, 0).toString());
+
+
+    try {
+        TurmaDAO dao = new TurmaDAO();
+
+        if (dao.turmaTemAtividades(idTurma)) {
+            JOptionPane.showMessageDialog(this, "Não é possível excluir a turma. Existem atividades cadastradas.");
+            return;
+        }
+
+        int opcao = JOptionPane.showConfirmDialog(this,
+            "Deseja realmente excluir esta turma?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (opcao == JOptionPane.YES_OPTION) {
+            dao.excluirTurma(idTurma);
+            carregarTurmas();
+            JOptionPane.showMessageDialog(this, "Turma excluída com sucesso!");
+             // Atualize a tabela após excluir
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao excluir turma: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed

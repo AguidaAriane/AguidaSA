@@ -52,6 +52,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Login");
@@ -114,9 +115,10 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel5.setText("ClassGo");
         jPanelLogin.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 230, -1));
         jPanelLogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\aguida_silva\\Documents\\Git hub SA\\AguidaSA\\SA_ClassGo\\src\\imagem\\logo02.png")); // NOI18N
         jPanelLogin.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Documents\\Git hub SA\\AguidaSA\\SA_ClassGo\\src\\imagem\\logo02.png")); // NOI18N
+        jPanelLogin.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,6 +221,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JRadioButton jMostrarSenha;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JTextField txtEmail;

@@ -63,11 +63,35 @@ public class TurmaDAO {
     }
    
    
+public boolean turmaTemAtividades(int idTurma) throws Exception {
+    String sql = "SELECT COUNT(*) FROM Atividade WHERE Turma_idturma = ?";
 
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, idTurma);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        return false;
+    }
+}
+
+    public void excluirTurma(int idTurma) throws Exception {
+    String sql = "DELETE FROM Turma WHERE idturma = ?";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, idTurma);
+        stmt.executeUpdate();
+    }
     
     
             
-        
+    }  
         
     }
 

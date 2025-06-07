@@ -180,7 +180,7 @@ private Turma turmaSelecionada;
             
          JOptionPane.showMessageDialog(this, "Erro ao cadastrar atividade: " + e.getMessage());   
         }
-        
+         
         txtNomeAtividade.setText("");
         txtDescricao.setText("");
         
