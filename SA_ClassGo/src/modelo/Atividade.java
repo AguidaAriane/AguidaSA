@@ -10,6 +10,7 @@ package modelo;
  */
 public class Atividade {
     
+    private int idAtividade;
     private String nome;
     private String descricao;
     private Turma turma;
@@ -18,19 +19,20 @@ public class Atividade {
     public Atividade() {
     }
 
-    public Atividade(String nome, String descricao, Turma turma, Professor professor) {
+    public Atividade(int idAtividade, String nome, String descricao, Turma turma, Professor professor) {
+        this.idAtividade = idAtividade;
         this.nome = nome;
         this.descricao = descricao;
         this.turma = turma;
         this.professor = professor;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public int getIdAtividade() {
+        return idAtividade;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setIdAtividade(int idAtividade) {
+        this.idAtividade = idAtividade;
     }
 
     public String getNome() {
@@ -56,6 +58,15 @@ public class Atividade {
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
     
     
 }

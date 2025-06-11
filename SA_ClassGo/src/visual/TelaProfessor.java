@@ -25,7 +25,7 @@ private Turma turma;
         initComponents();
         
     this.professorLogado = logado;
-    carregarTurmas();
+    listarTurmas();
    
     txtNomeProfessor.setEditable(false);
     txtNomeProfessor.setText(professorLogado.getNome());
@@ -208,7 +208,7 @@ private Turma turma;
         return;
     }
 
-    // Supondo que a coluna 1 (índice 1) tem o ID da turma
+    
     int idTurma = Integer.parseInt(tabelaTurma.getValueAt(linhaSelecionada, 0).toString());
 
 
@@ -225,9 +225,9 @@ private Turma turma;
 
         if (opcao == JOptionPane.YES_OPTION) {
             dao.excluirTurma(idTurma);
-            carregarTurmas();
+            listarTurmas();
             JOptionPane.showMessageDialog(this, "Turma excluída com sucesso!");
-             // Atualize a tabela após excluir
+             
         }
 
     } catch (Exception e) {
@@ -257,7 +257,7 @@ private Turma turma;
 
     }//GEN-LAST:event_btnVisualizarActionPerformed
     
-    private void carregarTurmas() {
+    private void listarTurmas() {
     try {
         TurmaDAO dao = new TurmaDAO();
         List<Turma> lista = dao.listarTurma(professorLogado.getIdProfessor());

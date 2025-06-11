@@ -47,12 +47,10 @@ public class TurmaDAO {
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
-            int idturma = rs.getInt("idturma");
-            String nome = rs.getString("nome");
-
+           
             Turma turma = new Turma();
-            turma.setIdturma(idturma);
-            turma.setNome(nome);
+            turma.setIdturma(rs.getInt("idturma"));
+            turma.setNome(rs.getString("nome"));
 
             listaTurma.add(turma);
         }

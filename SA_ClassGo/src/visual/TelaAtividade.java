@@ -26,7 +26,7 @@ private Professor professorLogado;
         initComponents();
         this.turmaSelecionada = turma;
         this.professorLogado = turma.getProfessor();
-        carregarAtividades();
+        listarAtividades();
     txtNomeTurma.setEditable(false);
     txtNomeTurma.setText(turmaSelecionada.getNome());
     
@@ -37,7 +37,7 @@ private Professor professorLogado;
     
     }
     
-    private void carregarAtividades() {
+    private void listarAtividades() {
     try {
         AtividadeDAO dao = new AtividadeDAO();
         List<Atividade> lista = dao.listarAtividadesPorTurma(
@@ -49,7 +49,7 @@ private Professor professorLogado;
         modelo.setRowCount(0); // limpa tabela
 
         for (Atividade a : lista) {
-            modelo.addRow(new Object[]{a.getNome(), a.getDescricao()});
+            modelo.addRow(new Object[]{a.getIdAtividade(),a.getNome(), a.getDescricao()});
         }
 
     } catch (Exception e) {
@@ -89,13 +89,13 @@ private Professor professorLogado;
 
         tabelaAtividade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Numero", "Nome"
+                "Numero", "Nome", "Descrição"
             }
         ));
         jScrollPane1.setViewportView(tabelaAtividade);

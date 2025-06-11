@@ -47,6 +47,9 @@ public class AtividadeDAO {
 
         while (rs.next()) {
             Atividade a = new Atividade();
+            
+            
+            a.setIdAtividade(rs.getInt("idAtividade"));
             a.setNome(rs.getString("nome"));
             a.setDescricao(rs.getString("descricao"));
 
